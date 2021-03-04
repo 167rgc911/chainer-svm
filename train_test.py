@@ -19,10 +19,7 @@ def get_model_optimizer(args):
     model = SVM(c=args.c, penalty=args.penalty)
     if args.gpu >= 0:
         model.to_gpu()
-    if args.penalty == 'L2':
-        optimizer = optimizers.SGD(lr=args.lr)
-    elif args.penalty == 'L1':
-        optimizer = SGD(lr=args.lr)
+    optimizer = optimizers.SGD(lr=args.lr)
     optimizer.setup(model)
 
     return model, optimizer
@@ -47,10 +44,6 @@ def train(args, X, Y, model, optimizer):
 
             loss = model.forward(x, t)
             loss.backward()
-            if args.penalty == 'L1':
-                optimizer.l1_regularization(c=args.c)
-            elif args.penalty == 'L2':
-                optimizer.weight_decay(decay=args.c)
             optimizer.update()
             sum_loss += float(loss.data) * len(t)
 
@@ -101,7 +94,6 @@ if __name__ == '__main__':
     parser.add_argument('--lr', type=float, default=0.1)
     parser.add_argument('--batchsize', type=int, default=50)
     parser.add_argument('--epoch', type=int, default=500)
-    parser.add_argument('--penalty', type=str, default='L1')
     args = parser.parse_args()
 
     X, Y = get_data()
