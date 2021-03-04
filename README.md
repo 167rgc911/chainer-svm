@@ -5,7 +5,7 @@ This is an implementation of Support Vector Machines (SVM) using Chainer.
 
 # Requirement
 
-- [Chainer](https://github.com/pfn/chainer)
+- [Chainer](https://github.com/chainer/chainer) (modified to chainer 7.7)
 
 # Train & Test
 
