@@ -1,15 +1,15 @@
 from hinge import hinge
 
 import chainer
-import chainer.functions as F
-from chainer import cuda, Variable
+import chainer.links as L
+from chainer import cuda, Variable, Chain
 
 
-class SVM(chainer.FunctionSet):
+class SVM(Chain):
 
     def __init__(self, c, penalty='L1'):
         super(SVM, self).__init__(
-            fc=F.Linear(2, 2),
+            fc=L.Linear(2, 2),
         )
         self.c = c
         self.penalty = penalty
@@ -24,10 +24,10 @@ class SVM(chainer.FunctionSet):
         loss = hinge(h, t, self.penalty)
 
         if self.penalty == 'l1':
-            loss += self.c * F.sum(Variable(abs(self.fc.W)))
+            loss += self.c * L.sum(Variable(abs(self.fc.W)))
 
         elif self.penalty == 'l2':
             n = Variable(self.fc.W.dot(self.fc.W.T))
-            loss += self.c * F.reshape(n, ())
+            loss += self.c * L.reshape(n, ())
 
         return loss
