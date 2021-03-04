@@ -45,7 +45,6 @@ def train(args, X, Y, model, optimizer):
             x = xp.asarray(X[perm[i:i + args.batchsize]], dtype=np.float32)
             t = xp.asarray(Y[perm[i:i + args.batchsize]], dtype=np.int32)
 
-            optimizer.zero_grads()
             loss = model.forward(x, t)
             loss.backward()
             if args.penalty == 'L1':
