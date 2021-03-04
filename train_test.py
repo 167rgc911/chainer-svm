@@ -12,8 +12,7 @@ import matplotlib.pyplot as plt
 from chainer import cuda
 from chainer import optimizers
 from svm import SVM
-from optimizer import SGD
-from sklearn.datasets.samples_generator import make_blobs
+from sklearn.datasets import make_blobs
 
 
 def get_model_optimizer(args):
