@@ -94,6 +94,7 @@ if __name__ == '__main__':
     parser.add_argument('--lr', type=float, default=0.1)
     parser.add_argument('--batchsize', type=int, default=50)
     parser.add_argument('--epoch', type=int, default=500)
+    parser.add_argument('--penalty', type=str, default='L2')
     args = parser.parse_args()
 
     X, Y = get_data()
