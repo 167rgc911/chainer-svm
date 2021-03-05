@@ -66,12 +66,12 @@ def get_z(args, model, X, Y, i):
     x, y = np.meshgrid(x, y)
     xx, yy = map(np.ravel, [x, y])
     z = (W[0] * xx + W[1] * yy + b).reshape(x.shape)
-    z[np.where(z > 0)], z[np.where(z <= 0)] = 1, -1
+    z.array[np.where(z.array > 0)] , z.array[np.where(z.array <= 0)] = 1, -1
 
     plt.clf()
     plt.xlim([np.min(X[:, 0]) + delta, np.max(X[:, 0]) - delta])
     plt.ylim([np.min(X[:, 1]) + delta, np.max(X[:, 1]) - delta])
-    plt.contourf(x, y, z, cmap=plt.cm.Paired, alpha=0.8)
+    plt.contourf(x, y, z.array, cmap=plt.cm.Paired, alpha=0.8)
 
     x0 = X[np.where(Y == 0)]
     x1 = X[np.where(Y == 1)]
